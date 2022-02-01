@@ -55,7 +55,33 @@ public class JdbcItemRepository implements ItemRepository {
 
     @Override
     public Optional<Item> findById(Long id) {
-        return Optional.empty();
+        String sql = "select * from item where id = ?";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, id);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                Item item = new Item();
+                item.setId(rs.getLong("id"));
+                item.setItemName(rs.getString("itemname"));
+                item.setPrice(rs.getInt("price"));
+                item.setQuantity(rs.getInt("quantity"));
+                return Optional.of(item);
+            } else {
+                return Optional.empty();
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        } finally {
+            close(conn, pstmt, rs);
+        }
     }
 
     @Override
@@ -94,7 +120,26 @@ public class JdbcItemRepository implements ItemRepository {
 
     @Override
     public void update(Long itemId, Item updateParam) {
+        String sql = "update item set itemname=?, price=?, quantity=? where id = ?";
 
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(4, itemId);
+            pstmt.setString(1, updateParam.getItemName());
+            pstmt.setInt(2, updateParam.getPrice());
+            pstmt.setInt(3, updateParam.getQuantity());
+
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        } finally {
+            close(conn, pstmt, rs);
+        }
     }
 
     private Connection getConnection() {

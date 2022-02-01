@@ -14,8 +14,7 @@ public class ItemService {
 
     public Item saveItemService(Item item) {
         validateDuplicateItem(item);
-        Item saveItem = itemRepository.save(item);
-        return saveItem;
+        return itemRepository.save(item);
     }
 
     public Long join(Item item) {
@@ -37,5 +36,10 @@ public class ItemService {
 
     public Optional<Item> findOne(Long memberId) {
         return itemRepository.findById(memberId);
+    }
+
+    public void updateItemService(Long id, Item updateParam) {
+        itemRepository.update(id, updateParam);
+        return;
     }
 }
