@@ -41,10 +41,22 @@ public class BasicItemController {
         return "basic/addForm";
     }
 
-    @PostMapping("/add")
-    public String addItemV6(@ModelAttribute("item") Item item,
-                            RedirectAttributes redirectAttributes) {
+//    @PostMapping("/add")
+//    public String addItemV6(@ModelAttribute("item") Item item,
+//                            RedirectAttributes redirectAttributes) {
+//
+//        Item savedItem = itemService.saveItemService(item);
+//        redirectAttributes.addAttribute("itemId", savedItem.getId());
+//        redirectAttributes.addAttribute("status", true);
+//        return "redirect:/basic/items/{itemId}";
+//    }
 
+    @PostMapping("/add")
+    public String addItemV7(@ModelAttribute("item") Item item,
+                            RedirectAttributes redirectAttributes,
+                            Model model,
+                            @RequestParam("files") MultipartFile[] files) {
+        uploadFile(model, files);
         Item savedItem = itemService.saveItemService(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status", true);
@@ -72,7 +84,10 @@ public class BasicItemController {
     /**
      * Image Upload Test
      */
-    public static String uploadDirectory = System.getProperty("user.dir") + "/uploads";
+    //public static String uploadDirectory = System.getProperty("user.dir") + "/uploads";
+    //public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/templates/uploads";
+    //public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/templates/itemImageBox";
+    public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/itemImageBox";
 
     @GetMapping("/view")
     public String uploadPage(Model model) {
@@ -93,5 +108,18 @@ public class BasicItemController {
         }
         model.addAttribute("msg", "Successfully uploads files " + fileNames.toString());
         return "basic/uploadstatusview";
+    }
+
+    public void uploadFile(Model model, @RequestParam("files") MultipartFile[] files) {
+        StringBuilder fileNames = new StringBuilder();
+        for (MultipartFile file : files) {
+            Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
+            fileNames.append(file.getOriginalFilename() + " ");
+            try {
+                Files.write(fileNameAndPath, file.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
