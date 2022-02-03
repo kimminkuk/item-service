@@ -3,7 +3,7 @@ Shop Concept
 
 ## stack
 * Spring
-*bootstrap
+* bootstrap
 
 ## Database
 h2
