@@ -9,6 +9,7 @@ Shop Concept
 h2
 
 ## ToDo
-1.Upload ShopItem
-2.Member Login
-3.Buy/Sell Item
+* DB connect      80% (JDBC ok, JPA x)
+* Upload ShopItem 50% (bootstarp, Image Upload wait)
+* Member Login    0%
+* Buy/Sell Item   0%
