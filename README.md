@@ -1,8 +1,9 @@
 # item-service
 Shop Concept
 
-## Language
+## stack
 Spring
+bootstrap
 
 ## Database
 h2
