@@ -1,12 +1,13 @@
-# item-service (Shop Concept)
+# item-service
+Shop Concept
 
-# Language
+## Language
 1.Spring
 
-# Database
+## Database
 1.h2
 
-# ToDo
+## ToDo
 1. Upload ShopItem
 2. Member Login
 3. Buy/Sell Item
