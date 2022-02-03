@@ -2,12 +2,12 @@
 Shop Concept
 
 ## Language
-1.Spring
+Spring
 
 ## Database
-1.h2
+h2
 
 ## ToDo
-1. Upload ShopItem
-2. Member Login
-3. Buy/Sell Item
+1.Upload ShopItem
+2.Member Login
+3.Buy/Sell Item
