@@ -30,32 +30,32 @@ class ItemMemoryRepositoryTest {
     @Test
     void findAll() {
         //given
-        Item item1 = new Item("item1", 10000, 10);
-        Item item2 = new Item("item2", 20000, 20);
-        itemMemoryRepository.save(item1);
-        itemMemoryRepository.save(item2);
+        Item itemV1 = new Item("item1", 10000, 10);
+        Item itemV2 = new Item("item2", 20000, 20);
+        itemMemoryRepository.save(itemV1);
+        itemMemoryRepository.save(itemV2);
 
         //when
         List<Item> result = itemMemoryRepository.findAll();
 
         //then
         assertThat(result.size()).isEqualTo(2);
-        assertThat(result).contains(item1, item2);
+        assertThat(result).contains(itemV1, itemV2);
     }
 
     @Test
     void findByName() {
         //given
-        Item item1 = new Item("baby-Yoda", 6400000, 2);
-        Item item2 = new Item("Special-Yoda", 320000, 6);
-        itemMemoryRepository.save(item1);
-        itemMemoryRepository.save(item2);
+        Item itemV1 = new Item("baby-Yoda", 6400000, 2);
+        Item itemV2 = new Item("Special-Yoda", 320000, 6);
+        itemMemoryRepository.save(itemV1);
+        itemMemoryRepository.save(itemV2);
 
         //when
         Item findItem = itemMemoryRepository.findByName("baby-Yoda").get();
 
         //then
-        assertThat(findItem).isEqualTo(item1);
+        assertThat(findItem).isEqualTo(itemV1);
     }
 
     @Test

@@ -1,16 +1,9 @@
 package hello.itemservice.domain.Member;
-
-import org.assertj.core.api.Assertions;
-import org.assertj.core.api.Fail;
-import org.assertj.core.error.ShouldNotExist;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class MemberMemoryRepositoryTest {
     MemberMemoryRepository testRepository = new MemberMemoryRepository();
